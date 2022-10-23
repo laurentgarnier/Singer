@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Singer.PlayerControlBar.Module.Views.PlayerControlBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Singer.PlayerControlBar.Module.Views"
+             xmlns:dc="clr-namespace:Singer.PlayerControlBar.Module.ViewModels"
+             xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
+              md:DialogServiceViews.IsRegistered="True"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance dc:PlayerControlBarViewModel}">
+    <GroupBox Header="Player" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Margin="2"
+                    TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Run Text="{Binding CurrentSong}" FontSize="15" FontWeight="Bold"/>
+            <LineBreak/>
+            <Run Text="{Binding RemainingTime}" FontWeight="Bold" FontSize="30"/><Run Text=" - "/><Run Text="{Binding DisplayedTime}" FontSize="15"/>
+            </TextBlock>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="PlayButton" Command="{Binding PlayCommand}" >
+                    <Image Source="Play.png" Width="15" Height="15"/>
+                </Button>
+                <Button Content="■" Command="{Binding StopCommand}"  Foreground="Red" FontSize="{StaticResource UpperFontSize}" FontWeight="ExtraBold"/>
+                <Button Content="| |" Command="{Binding PauseCommand}" Foreground="Orange" FontSize="{StaticResource UpperFontSize}" FontWeight="ExtraBold"/>
+                <Button Command="{Binding NextCommand}" >
+                    <Image Source="Next.png" Width="20" Height="20"/>
+                </Button>
+                <Button Command="{Binding ParamCommand}" Height="30" Width="30" Margin="50, 0, 25,0">
+                    <Image Source="Settings.png" Width="20" Height="20"/>
+                </Button>
+                <Button Command="{Binding OpenSecondScreenCommand}" Height="30" Width="30">
+                    <Image Source="2ndScreen.png" Width="20" Height="20"/>
+                </Button>
+            </StackPanel>
+            <TextBlock Grid.Row="2" Text="{Binding NextSong}" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Grid>
+    </GroupBox>
+</UserControl>

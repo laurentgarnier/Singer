@@ -1,0 +1,43 @@
+﻿<Window x:Class="Singer.MediaAndLyrics.Module.Views.LyricsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:pdfiumViewer="clr-namespace:PdfiumViewer;assembly=PdfiumViewer"
+        xmlns:utilities="clr-namespace:Singer.MediaAndLyrics.Module.Helpers"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:dc="clr-namespace:Singer.MediaAndLyrics.Module.ViewModels"
+        mc:Ignorable="d"
+        Title="Paroles"
+        d:DataContext="{d:DesignInstance dc:MediaAndLyricsViewerViewModel}"
+        Visibility="{Binding LyricsWindowVisibility, Mode=TwoWay}"
+        Style="{StaticResource {x:Type Window}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <prism:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closing">
+            <prism:InvokeCommandAction Command="{Binding LyricsWindowClosingCommand}" CommandParameter="{Binding CancelLyricsWindowClosing}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Background="{StaticResource WindowBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="5"
+                    TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="{StaticResource DarkFontColor}">
+            <Run Text="{Binding RemainingTime}" FontWeight="Bold" FontSize="{StaticResource MegaExtraFontSize}"/><LineBreak/>
+            <Run Text="{Binding DisplayedTime}" FontSize="{StaticResource UpperFontSize}"/><LineBreak/><LineBreak/><LineBreak/>
+            <Run Text="Dans la playlist" FontSize="{StaticResource MainFontSize}"/><LineBreak/>
+            <Run Text="{Binding RemainingSongs}" FontWeight="DemiBold" FontSize="{StaticResource MegaExtraFontSize}"/>
+
+        </TextBlock>
+        <pdfiumViewer:PdfRenderer x:Name="Renderer" Grid.Row="0" Grid.Column="1"
+                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                  utilities:PdfRendererHelper.PdfFile="{Binding PdfFile}"
+                                  Zoom="1"/>
+    </Grid>
+</Window>

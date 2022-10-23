@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Views\2ndScreen.png" />
+	  <None Remove="Views\Next.png" />
+	  <None Remove="Views\Play.png" />
+	  <None Remove="Views\Settings.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+		<PackageReference Include="MvvmDialogs" Version="9.0.1" />
+		<PackageReference Include="Prism.Core" Version="8.1.97" />
+		<PackageReference Include="Prism.Wpf" Version="8.1.97" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Singer.Business.Api\Singer.Business.Api.csproj" />
+		<ProjectReference Include="..\Singer.MediaAndLyrics.module\Singer.MediaAndLyrics.Module.csproj" />
+		<ProjectReference Include="..\Singer.PlaylistManagement.Module\Singer.PlaylistManagement.Module.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Views\2ndScreen.png" />
+	  <Resource Include="Views\Next.png" />
+	  <Resource Include="Views\Play.png" />
+	  <Resource Include="Views\Settings.png" />
+	</ItemGroup>
+
+</Project>

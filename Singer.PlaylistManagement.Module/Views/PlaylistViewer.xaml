@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Singer.PlaylistManagement.Module.Views.PlaylistViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:model="clr-namespace:Singer.Business.Api.Common;assembly=Singer.Business.Api"
+             xmlns:local="clr-namespace:Singer.PlaylistManagement.Module.Views"
+             xmlns:dc="clr-namespace:Singer.PlaylistManagement.Module.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance dc:PlaylistViewerViewModel}">
+    <GroupBox Header="{Binding HeaderText}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ListView ItemsSource="{Binding Songs}">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type model:SongDto}">
+                    <CheckBox Content="{Binding Name}" IsChecked="True"
+                                  Command="{Binding DataContext.SongUnchecked, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                  CommandParameter="{Binding}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </GroupBox>
+</UserControl>
