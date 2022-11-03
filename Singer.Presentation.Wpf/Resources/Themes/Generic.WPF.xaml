@@ -5,11 +5,11 @@
         <ResourceDictionary Source="Generic.Brushes.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <sys:Double x:Key="MainFontSize">14</sys:Double>
-    <sys:Double x:Key="SmallerFontSize">12</sys:Double>
-    <sys:Double x:Key="UpperFontSize">15</sys:Double>
+    <sys:Double x:Key="MainFontSize">18</sys:Double>
+    <sys:Double x:Key="SmallerFontSize">16</sys:Double>
+    <sys:Double x:Key="UpperFontSize">20</sys:Double>
     <sys:Double x:Key="ExtraFontSize">30</sys:Double>
-    <sys:Double x:Key="MegaExtraFontSize">40</sys:Double>
+    <sys:Double x:Key="MegaExtraFontSize">60</sys:Double>
 
     <Style x:Key="{x:Type Window}" TargetType="{x:Type Window}">
         <Setter Property="SnapsToDevicePixels" Value="true"/>

@@ -10,11 +10,22 @@
              xmlns:utilities="clr-namespace:Singer.MediaAndLyrics.Module.Helpers"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance dc:MediaAndLyricsViewerViewModel}">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Right" Command="{Binding NextPageCommand}"/>
+        <KeyBinding Key="Left" Command="{Binding PreviousPageCommand}"/>
+    </UserControl.InputBindings>
     <Grid Background="{StaticResource WindowBackgroundBrush}">
-        <pdfiumViewer:PdfRenderer x:Name="Renderer"
+        <pdfiumViewer:PdfRenderer x:Name="Renderer" Grid.Row="0" Grid.Column="1"
                                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                   utilities:PdfRendererHelper.PdfFile="{Binding PdfFile}"
                                   utilities:PdfRendererHelper.ClosePdfFile="{Binding ClosePdf}"
-                                  Zoom="1"/>
+                                  utilities:PdfRendererHelper.NextPage="{Binding NextPage}"
+                                  utilities:PdfRendererHelper.PreviousPage="{Binding PreviousPage}"
+                                  Zoom="1">
+            <pdfiumViewer:PdfRenderer.InputBindings>
+                <KeyBinding Key="Right" Command="{Binding NextPageCommand}"/>
+                <KeyBinding Key="Left" Command="{Binding PreviousPageCommand}"/>
+            </pdfiumViewer:PdfRenderer.InputBindings>
+        </pdfiumViewer:PdfRenderer>
     </Grid>
 </UserControl>
