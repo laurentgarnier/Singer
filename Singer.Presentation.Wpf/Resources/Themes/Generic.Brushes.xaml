@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="DarkGRay" />
-    <SolidColorBrush x:Key="MainFontColor" Color="White" />
+    <SolidColorBrush x:Key="MainFontColor" Color="DarkBlue" />
     <SolidColorBrush x:Key="DarkFontColor" Color="Black" />
 
 

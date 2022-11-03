@@ -52,8 +52,56 @@ namespace Singer.MediaAndLyrics.Module.Helpers
             PdfRenderer renderer = o as PdfRenderer;
             if (renderer != null)
             {
-                if((bool)e.NewValue)
+                if ((bool)e.NewValue)
                     renderer.UnLoad();
+            }
+        }
+
+        // Next Page
+        public static readonly DependencyProperty NextPageProperty =
+            DependencyProperty.RegisterAttached("NextPage", typeof(bool), typeof(PdfRendererHelper), new UIPropertyMetadata(false, NextPagePropertyChanged));
+
+        public static bool GetNextPage(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(NextPageProperty);
+        }
+
+        public static void SetNextPage(DependencyObject obj, bool value)
+        {
+            obj.SetValue(NextPageProperty, value);
+        }
+
+        public static void NextPagePropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            PdfRenderer renderer = o as PdfRenderer;
+            if (renderer != null)
+            {
+                if ((bool)e.NewValue)
+                    renderer.NextPage();
+            }
+        }
+
+        // Previous Page
+        public static readonly DependencyProperty PreviousPageProperty =
+            DependencyProperty.RegisterAttached("PreviousPage", typeof(bool), typeof(PdfRendererHelper), new UIPropertyMetadata(false, PreviousPagePropertyChanged));
+
+        public static bool GetPreviousPage(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(PreviousPageProperty);
+        }
+
+        public static void SetPreviousPage(DependencyObject obj, bool value)
+        {
+            obj.SetValue(PreviousPageProperty, value);
+        }
+
+        public static void PreviousPagePropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            PdfRenderer renderer = o as PdfRenderer;
+            if (renderer != null)
+            {
+                if ((bool)e.NewValue)
+                    renderer.PreviousPage();
             }
         }
 

@@ -60,7 +60,7 @@ namespace Singer.Business.BroadcastingManagement
         {
             var firstSongInPlaylist = _playlistManager?.Songs.FirstOrDefault();
             
-            if (firstSongInPlaylist == null || firstSongInPlaylist.MediaPath == null || _playlistManager?.Songs.Count() < 2) return;
+            if (firstSongInPlaylist == null || firstSongInPlaylist.MediaPath == null || _playlistManager?.Songs.Count() < 1) return;
 
             _playlistManager?.Remove(firstSongInPlaylist.Id);
             Play();

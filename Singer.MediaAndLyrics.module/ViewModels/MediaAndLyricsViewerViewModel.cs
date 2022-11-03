@@ -52,6 +52,8 @@ namespace Singer.MediaAndLyrics.Module.ViewModels
 
             LyricsWindowClosingCommand = new DelegateCommand<CancelEventArgs>(LyricsWindowClosing);
             _eventAggregator.GetEvent<ApplicationClosingEvent>().Subscribe(() => Process.GetCurrentProcess().Kill());
+            RemainingTime = "00:00";
+            DisplayedTime = "00:00";
 
         }
 
@@ -62,7 +64,7 @@ namespace Singer.MediaAndLyrics.Module.ViewModels
 
         private void ComputeRemaininSong()
         {
-            RemainingSongs = _playlistService.Songs.Count().ToString();
+            RemainingSongs = _playlistService.Songs.Count() > 0 ? (_playlistService.Songs.Count()-1).ToString() : "0";
         }
 
         private void playlistService_SongChanged(object? sender, Business.Api.Common.SongDto e)
@@ -109,6 +111,8 @@ namespace Singer.MediaAndLyrics.Module.ViewModels
             if (_mediaPlayer.Source != null)
                 _mediaPlayer.Close();
             ClosePdf = true;
+            RemainingTime = "00:00";
+            DisplayedTime = "00:00";
             _mediaPlayerStatus = MediaPlayerStatus.Stopped;
             _player.PlayNext();
         }
@@ -178,6 +182,22 @@ namespace Singer.MediaAndLyrics.Module.ViewModels
             LyricsWindowVisibility = System.Windows.Visibility.Hidden;
         }
 
+        private ActionCommand _nextPageCommand;
+        public ICommand NextPageCommand => _nextPageCommand ??= new ActionCommand(GoToNextPage);
+
+        private void GoToNextPage()
+        {
+            NextPage = !NextPage;
+        }
+
+        private ActionCommand _previousPageCommand;
+        public ICommand PreviousPageCommand => _previousPageCommand ??= new ActionCommand(GoToPreviousPage);
+
+        private void GoToPreviousPage()
+        {
+            PreviousPage = !PreviousPage;
+        }
+
         private string _remainingTime;
 
         public string RemainingTime { get => _remainingTime; set => SetProperty(ref _remainingTime, value); }
@@ -189,5 +209,13 @@ namespace Singer.MediaAndLyrics.Module.ViewModels
         private string _remainingSongs;
 
         public string RemainingSongs { get => _remainingSongs; set => SetProperty(ref _remainingSongs, value); }
+
+        private bool _nextPage;
+
+        public bool NextPage { get => _nextPage; set => SetProperty(ref _nextPage, value); }
+
+        private bool _previousPage;
+
+        public bool PreviousPage { get => _previousPage; set => SetProperty(ref _previousPage, value); }
     }
 }
