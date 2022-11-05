@@ -14,10 +14,6 @@
         d:DataContext="{d:DesignInstance dc:MediaAndLyricsViewerViewModel}"
         Visibility="{Binding LyricsWindowVisibility, Mode=TwoWay}"
         Style="{StaticResource {x:Type Window}}">
-    <Window.InputBindings>
-        <KeyBinding Key="Right" Command="{Binding NextPageCommand}"/>
-        <KeyBinding Key="Left" Command="{Binding PreviousPageCommand}"/>
-    </Window.InputBindings>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <prism:InvokeCommandAction Command="{Binding LoadedCommand}"/>
@@ -46,10 +42,6 @@
                                   utilities:PdfRendererHelper.NextPage="{Binding NextPage}"
                                   utilities:PdfRendererHelper.PreviousPage="{Binding PreviousPage}"
                                   Zoom="1">
-            <pdfiumViewer:PdfRenderer.InputBindings>
-                <KeyBinding Key="Right" Command="{Binding NextPageCommand}"/>
-                <KeyBinding Key="Left" Command="{Binding PreviousPageCommand}"/>
-            </pdfiumViewer:PdfRenderer.InputBindings>
         </pdfiumViewer:PdfRenderer>
     </Grid>
 </Window>

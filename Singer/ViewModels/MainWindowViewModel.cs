@@ -31,5 +31,21 @@ namespace Singer.ViewModels
                 config.AppSettings.Settings.Add("RootFolder", obj);
             config.Save(ConfigurationSaveMode.Minimal);
         }
+
+        private ActionCommand _nextPageCommand;
+        public ICommand NextPageCommand => _nextPageCommand ??= new ActionCommand(GoToNextPage);
+
+        private void GoToNextPage()
+        {
+            _eventAggregator.GetEvent<NextKeyPressedEvent>().Publish();
+        }
+
+        private ActionCommand _previousPageCommand;
+        public ICommand PreviousPageCommand => _previousPageCommand ??= new ActionCommand(GoToPreviousPage);
+
+        private void GoToPreviousPage()
+        {
+            _eventAggregator.GetEvent<PreviousKeyPressedEvent>().Publish();
+        }
     }
 }

@@ -75,10 +75,7 @@ namespace Singer.MediaAndLyrics.Module.Helpers
         {
             PdfRenderer renderer = o as PdfRenderer;
             if (renderer != null)
-            {
-                if ((bool)e.NewValue)
-                    renderer.NextPage();
-            }
+                renderer.NextPage();
         }
 
         // Previous Page
@@ -99,10 +96,7 @@ namespace Singer.MediaAndLyrics.Module.Helpers
         {
             PdfRenderer renderer = o as PdfRenderer;
             if (renderer != null)
-            {
-                if ((bool)e.NewValue)
-                    renderer.PreviousPage();
-            }
+                renderer.PreviousPage();
         }
 
     }

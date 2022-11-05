@@ -10,7 +10,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -52,6 +51,8 @@ namespace Singer.MediaAndLyrics.Module.ViewModels
 
             LyricsWindowClosingCommand = new DelegateCommand<CancelEventArgs>(LyricsWindowClosing);
             _eventAggregator.GetEvent<ApplicationClosingEvent>().Subscribe(() => Process.GetCurrentProcess().Kill());
+            _eventAggregator.GetEvent<PreviousKeyPressedEvent>().Subscribe(() => GoToPreviousPage());
+            _eventAggregator.GetEvent<NextKeyPressedEvent>().Subscribe(() => GoToNextPage());
             RemainingTime = "00:00";
             DisplayedTime = "00:00";
 
@@ -182,16 +183,10 @@ namespace Singer.MediaAndLyrics.Module.ViewModels
             LyricsWindowVisibility = System.Windows.Visibility.Hidden;
         }
 
-        private ActionCommand _nextPageCommand;
-        public ICommand NextPageCommand => _nextPageCommand ??= new ActionCommand(GoToNextPage);
-
         private void GoToNextPage()
         {
             NextPage = !NextPage;
         }
-
-        private ActionCommand _previousPageCommand;
-        public ICommand PreviousPageCommand => _previousPageCommand ??= new ActionCommand(GoToPreviousPage);
 
         private void GoToPreviousPage()
         {

@@ -12,6 +12,12 @@
             <prism:InvokeCommandAction Command="{Binding WindowClosingCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <Window.InputBindings>
+        <KeyBinding Key="Space"  Command="{Binding NextPageCommand}"
+                HotkeyManager.RegisterGlobalHotkey="True" />
+        <KeyBinding Key="Left"  Command="{Binding PreviousPageCommand}"
+                HotkeyManager.RegisterGlobalHotkey="True" />
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>    <!-- Viewer et librares -->
