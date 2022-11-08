@@ -3,6 +3,8 @@ using Singer.Business.Api.PlaylistManagement;
 using Singer.Business.PlaylistManagement;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Singer.Business.ApiServices
 {
@@ -28,6 +30,18 @@ namespace Singer.Business.ApiServices
         private void playlistManager_SongChanged(object sender, SongsManagement.MusicMedia e)
         {
             SongChanged?.Invoke(this, new SongDto() { Id = e.Id, Name = e.Name });
+        }
+
+        public string GetLyricsFile(Guid songId)
+        {
+            var songInPlayList = _playlistManager?.Songs.SingleOrDefault(s => s.Id.Equals(songId));
+            if (songInPlayList == null) return String.Empty;
+
+            var lyricsFile = Path.Combine(Path.GetDirectoryName(songInPlayList.MediaPath), $"{Path.GetFileNameWithoutExtension(songInPlayList.MediaPath)}.pdf");
+            if (File.Exists(lyricsFile))
+                return lyricsFile;
+
+            return String.Empty;
         }
 
         public IEnumerable<SongDto> Songs

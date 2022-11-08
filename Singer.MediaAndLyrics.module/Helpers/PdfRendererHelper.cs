@@ -26,7 +26,7 @@ namespace Singer.MediaAndLyrics.Module.Helpers
             if (renderer != null)
             {
                 var pdfFile = e.NewValue as string;
-
+                if (pdfFile.Equals(string.Empty)) return;
                 renderer.PagesDisplayMode = PdfViewerPagesDisplayMode.SinglePageMode;
                 renderer.OpenPdf(pdfFile);
                 renderer.PagesDisplayMode = renderer.Document.PageCount > 1 ? PdfViewerPagesDisplayMode.BookMode : PdfViewerPagesDisplayMode.SinglePageMode;

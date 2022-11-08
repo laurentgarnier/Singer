@@ -9,6 +9,7 @@ using Singer.Presentation.Wpf;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -61,6 +62,20 @@ namespace Singer.MediaAndLyrics.Module.ViewModels
         private void playlistService_SongListChanged(object? sender, EventArgs e)
         {
             ComputeRemaininSong();
+            DisplayLyrics();
+        }
+
+        private void DisplayLyrics()
+        {
+            var firstSongInPlayList = _playlistService.Songs.FirstOrDefault();
+            if (firstSongInPlayList == null)
+            {
+                ClosePdf = true;
+                PdfFile = String.Empty;
+                return;
+            }
+            ClosePdf = false;
+            PdfFile = _playlistService.GetLyricsFile(firstSongInPlayList.Id);
         }
 
         private void ComputeRemaininSong()
@@ -151,7 +166,10 @@ namespace Singer.MediaAndLyrics.Module.ViewModels
                 ClosePdf = false;
             }
             else
+            {
                 ClosePdf = true;
+                PdfFile = String.Empty;
+            }
             
             _mediaPlayer.Open(new Uri(e));
            

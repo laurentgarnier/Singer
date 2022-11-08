@@ -15,5 +15,7 @@ namespace Singer.Business.Api.PlaylistManagement
 
         public event EventHandler<SongDto> SongChanged;
         public event EventHandler SongListChanged;
+
+        string GetLyricsFile(Guid songId);
     }
 }
